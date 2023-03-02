@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EmptyLayoutComponent } from './core/layouts/empty/empty-layout.component';
 import { MasterpageComponent } from './core/layouts/masterpage/masterpage.component';
+import { AuthGuard } from './_guards/auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/authentication/signin', pathMatch: 'full' },
@@ -19,6 +20,8 @@ const routes: Routes = [
   },
   {
     path: '',
+    runGuardsAndResolvers: 'always',
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'employee',

@@ -48,8 +48,7 @@ export class SigninComponent implements OnInit {
       .pipe(first())
       .subscribe({
         next: () => {
-          const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-          this.router.navigateByUrl(returnUrl);
+          this.router.navigateByUrl('/employee/list');
         },
         error: (error) => {
           this.loading = false;

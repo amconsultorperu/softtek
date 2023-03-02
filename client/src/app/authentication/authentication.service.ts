@@ -1,13 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {
-  ActivatedRouteSnapshot,
-  Resolve,
-  RouterStateSnapshot,
-} from '@angular/router';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { User } from '../_models/user';
 import { LoggedUserModel } from './logged-user.model';
 
 @Injectable({
@@ -23,12 +19,12 @@ export class AuthenticationService {
   }
 
   isAuthenticated() {
-    // var user: any = JSON.parse(localStorage.getItem('user'));
-    // if(user == null)
-    //   this.loggedUserSubject.next(null);
-    // else
-    //   this.setCurrentUser(user);
-    // return this.loggedUserSubject.asObservable();
+    const userString = localStorage.getItem('user');
+    if (!userString) return;
+    const user: User = JSON.parse(userString);
+
+    this.setCurrentUser(user);
+    return this.loggedUserSubject.asObservable();
   }
 
   signin(model: any): Observable<any> {

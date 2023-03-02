@@ -1,1 +1,18 @@
-<p>employee-list works!</p>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nombre empleado</th>
+      <th scope="col">Email</th>
+      <th scope="col">¿está Activo?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let empl of employees">
+      <th scope="row">1</th>
+      <td>{{ empl.name }}</td>
+      <td>{{ empl.email }}</td>
+      <td>{{ empl.isActive }}</td>
+    </tr>
+  </tbody>
+</table>

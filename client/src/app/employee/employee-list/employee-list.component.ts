@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EmployeeService } from '../employee.service';
 import { EmployeeParams } from '../../_models/employeeParams';
+import { Employee } from '../../_models/employee';
 
 @Component({
   selector: 'app-employee-list',
@@ -9,6 +10,7 @@ import { EmployeeParams } from '../../_models/employeeParams';
 })
 export class EmployeeListComponent implements OnInit {
   storeParams: EmployeeParams = new EmployeeParams('');
+  employees: Employee[] | null = [];
   constructor(private employeeService: EmployeeService) {}
 
   ngOnInit(): void {
@@ -17,6 +19,7 @@ export class EmployeeListComponent implements OnInit {
       .getEmployees(this.storeParams)
       .subscribe((response) => {
         console.log('employee', response);
+        this.employees = response.result;
       });
   }
 }

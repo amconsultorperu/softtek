@@ -20,7 +20,11 @@ export class AuthenticationService {
 
   isAuthenticated() {
     const userString = localStorage.getItem('user');
-    if (!userString) return;
+    if (!userString) {
+      this.loggedUserSubject.next({ username: '', token: '' });
+      return this.loggedUserSubject.asObservable();
+    }
+
     const user: User = JSON.parse(userString);
 
     this.setCurrentUser(user);
@@ -38,14 +42,6 @@ export class AuthenticationService {
       })
     );
   }
-
-  // logout(): Observable<any> {
-  //   this.loggedUser = null;
-  //   // your log out logic should go here
-  //   localStorage.removeItem('user');
-  //   this.loggedUserSubject.next(this.loggedUser);
-  //   return of(true);
-  // }
 
   setCurrentUser(user: any) {
     this.loggedUserSubject.next(user);

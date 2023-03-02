@@ -38,7 +38,6 @@ export class SigninComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
-
     this.loading = true;
     this.authenticationService
       .signin({

@@ -43,6 +43,14 @@ export class AuthenticationService {
     );
   }
 
+  logout(): Observable<any> {
+    this.loggedUser = { username: '', token: '' };
+    // your log out logic should go here
+    localStorage.removeItem('user');
+    this.loggedUserSubject.next(this.loggedUser);
+    return of(true);
+  }
+
   setCurrentUser(user: any) {
     this.loggedUserSubject.next(user);
   }
